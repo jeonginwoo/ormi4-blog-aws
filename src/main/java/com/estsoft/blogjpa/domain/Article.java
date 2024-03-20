@@ -1,20 +1,19 @@
-package com.estsoft.blogjpa.model;
+package com.estsoft.blogjpa.domain;
 
 import com.estsoft.blogjpa.dto.ArticleResponse;
+import com.estsoft.blogjpa.dto.ArticleViewResponse;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@Entity // 테이블 생성
 @Getter
-@NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@Entity
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,13 +26,13 @@ public class Article {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @CreatedDate    //
+    @CreatedDate
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @LastModifiedDate   //
+    @LastModifiedDate
     @Column(name = "updated_at")
-    private LocalDateTime updateAt;
+    private LocalDateTime updatedAt;
 
     @Builder
     public Article(String title, String content) {
@@ -41,11 +40,18 @@ public class Article {
         this.content = content;
     }
 
+    public Article() {
+    }
+
     public ArticleResponse toResponse() {
         return ArticleResponse.builder()
                 .title(title)
                 .content(content)
                 .build();
+    }
+
+    public ArticleViewResponse toViewResponse() {
+        return new ArticleViewResponse(id, title, content, createdAt, updatedAt);
     }
 
     public void update(String title, String content) {

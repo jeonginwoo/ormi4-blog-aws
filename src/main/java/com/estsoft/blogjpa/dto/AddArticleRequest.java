@@ -1,6 +1,6 @@
 package com.estsoft.blogjpa.dto;
 
-import com.estsoft.blogjpa.model.Article;
+import com.estsoft.blogjpa.domain.Article;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class ArticleRequest {
+public class AddArticleRequest {
     private String title;
     private String content;
 

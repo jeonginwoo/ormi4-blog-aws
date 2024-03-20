@@ -1,5 +1,3 @@
-
-// 삭제 기능
 const deleteButton = document.getElementById('delete-btn');
 
 if (deleteButton) {
@@ -14,7 +12,6 @@ if (deleteButton) {
     });
 }
 
-
 // id가 modify-btn인 엘리먼트 조회
 const modifyButton = document.getElementById('modify-btn');
 
@@ -23,6 +20,7 @@ if (modifyButton) {
     modifyButton.addEventListener('click', event => {
         let params = new URLSearchParams(location.search);
         let id = params.get('id');
+        // let id = document.getElementById('article-id').value;
 
         fetch(`/api/articles/${id}`, {
             method: 'PUT',
@@ -40,7 +38,6 @@ if (modifyButton) {
     });
 }
 
-
 // 생성 기능
 const createButton = document.getElementById('create-btn');
 
@@ -57,7 +54,7 @@ if (createButton) {
             }),
         }).then(() => {
             alert('등록 완료되었습니다');
-            location.replace("/articles");
+            location.replace("/articles");   // GET /articles -> articleList.html
         })
     })
 }
